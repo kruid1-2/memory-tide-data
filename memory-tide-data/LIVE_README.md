@@ -4,7 +4,9 @@
 
 ## 当前状态
 
-目标已确定为公开仓库 [kruid1-2/memory-tide-data](https://github.com/kruid1-2/memory-tide-data)。代码与真实本地采集已验证；云上手动验证及至少四次计划执行的实际结果见 [LIVE_TEST_REPORT.md](LIVE_TEST_REPORT.md)，不要将本地采集计为 GitHub Actions 执行。
+已部署到公开仓库 [kruid1-2/memory-tide-data](https://github.com/kruid1-2/memory-tide-data)。[首次手动执行](https://github.com/kruid1-2/memory-tide-data/actions/runs/38346457723)已成功，远程原始响应及快照已读回核对；每 15 分钟计划采集已启用。至少四次真实计划执行的核验正在等待实际 schedule 事件，最新结果见 [LIVE_TEST_REPORT.md](LIVE_TEST_REPORT.md)。
+
+直接查看 [Actions](https://github.com/kruid1-2/memory-tide-data/actions/workflows/collect-weibo.yml)、[最新状态](https://github.com/kruid1-2/memory-tide-data/blob/data/observations/status.json)及[历史快照](https://github.com/kruid1-2/memory-tide-data/tree/data/observations/snapshots)。
 
 ## 文件与来源
 
@@ -12,6 +14,7 @@
 - `memory-tide-data/memory_tide/live.py`：请求、解析、追加保存、去重、状态恢复、端点变化及读取校验。
 - `memory-tide-data/deployment/restore_data.sh` / `persist_data.sh`：恢复/提交持久化 data 分支；不强制推送。
 - `memory-tide-data/deployment/run_summary.py`：Actions 运行摘要和数据查看链接。
+- `memory-tide-data/deployment/verify_cloud.py`：只读核对真实 GitHub 触发事件、成功步骤及远程原始数据，不把手动或 skipped 运行计入四次 schedule。
 - `memory-tide-data/tests/test_live_collection.py` / `test_workflow_persistence.py`：临时数据算法测试和临时 bare Git 持久化测试。
 
 复用现有 `core.clean_title/topic_id/time_iso/finite_number`，历史导入、数据库和分析程序没有被改写。直接来源 `https://weibo.com/ajax/side/hotSearch`，标识 `weibo/official-desktop-hotsearch-v1`；它与 `bhwa233/weibo-trending-hot-history` 的移动端历史指数分开。不得用两个来源的数值相减。移动接口和桌面网页在本次检查返回访客验证 HTML，因此不作为回退数据来源；官方桌面 JSON 已取得真实数据。
@@ -35,6 +38,8 @@ gh variable set WEIBO_SCHEDULE_ENABLED --body true --repo OWNER/REPO
 # 暂停计划采集，手动执行仍可用。
 gh variable set WEIBO_SCHEDULE_ENABLED --body false --repo OWNER/REPO
 ```
+
+本仓库已启用该变量；不需要再次开启。复核计划执行证据可以在 memory-tide-data 目录运行 `python3 deployment/verify_cloud.py --repo kruid1-2/memory-tide-data --manual-id 38346457723`，需要已登录的 gh CLI。结果保存到本地 live/cloud_verification.json。
 
 `WEIBO_SCHEDULE_ENABLED` 初始未设置，所以 schedule 的采集 job 跳过；手动 job 正常运行。启用后观察至少四次 `event=schedule`、有采集 job 实际成功且 data 分支保存对应 run_id 的结果；skipped、失败和手动运行都不能计入四次成功验证。示例中的 main 需替换成仓库实际默认分支。
 

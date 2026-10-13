@@ -46,19 +46,24 @@
       "sha256": "36ce77ad9c9df00d8786d746050f8477c6a2227f7ab0fc878439e1a4c800b7e1"
     },
     {
+      "path": "memory-tide-data/deployment/verify_cloud.py",
+      "bytes": 4735,
+      "sha256": "1e78b5322775cf4687712e6917eac0297a087f209c13c8ff19f4b8bb3cc7b73d"
+    },
+    {
       "path": "memory-tide-data/LIVE_README.md",
-      "bytes": 10245,
-      "sha256": "2daf45328659949a63c02786c62cd3f44b507e5543bb8a9281f6a423ae65c6e4"
+      "bytes": 11143,
+      "sha256": "12085e44fe2f81754116cce8686c7f1a3d69e49ba05eb973737e2f7ab0b6612c"
     },
     {
       "path": "memory-tide-data/LIVE_TEST_REPORT.md",
-      "bytes": 4619,
-      "sha256": "497da581f1e6b16bfc837f22a5f5d80004c7f1d431747dae7dc017fa958d3486"
+      "bytes": 6108,
+      "sha256": "acd784a92fcb9d6db875b8b0793ab2f3c48adda334c35346fcfcc3ad44823dbc"
     },
     {
       "path": "README.md",
-      "bytes": 10262,
-      "sha256": "a192967201734c438ebc730dc028890eca13f5e79ad611305f6d53f91c6c4e67"
+      "bytes": 11160,
+      "sha256": "3a6e2a6bbefa525eac15ea6905996a7bac6dde11dab8f99cd8e132a15f871502"
     },
     {
       "path": ".gitignore",
