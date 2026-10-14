@@ -20,3 +20,9 @@
 | 移除GitHub原生schedule | 未执行，保留 |
 
 后续填入Cloudflare真实Cron日志、每个窗口的run URL、原始SHA256、实际采集及保存时间；不得把本地fixture或原来的原生schedule结果当作Cloudflare验收。
+
+## 新入口 GitHub 云端兼容性验证（独立于Cloudflare验收）
+
+[运行38515048705](https://github.com/kruid1-2/memory-tide-data/actions/runs/38515048705)于2026-10-14T13:08:40+08:00接收真实榜单，53条话题、50个排名，采集/验证/持久化全部success。data分支原始响应重新解析与快照逐字段相同，SHA256 `2531c6055447f1028f329b2f4cd3c62939fc394165157f21f332586fb54ccfed`。
+
+该运行 event=workflow_dispatch、trigger_source=manual，来源记录已保存 `observations/scheduler/runs/38515048705/1.json`；窗口记录 `observations/scheduler/windows/1791954000.json`。**只是新版入口兼容性验证，不是Worker API探针，不计入Cloudflare连续8窗口。** 快照路径 `observations/snapshots/2026-10-14/130840_38515048705.json`。原有data历史继续保留。
