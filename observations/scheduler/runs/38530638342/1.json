@@ -1,0 +1,17 @@
+{
+  "schema_version": "1",
+  "run_id": "38530638342",
+  "attempt": 1,
+  "event": "schedule",
+  "trigger_source": "github-schedule",
+  "dispatch_id": null,
+  "scheduled_at": "2026-10-14T07:45:00Z",
+  "dispatched_at": null,
+  "window_id": "1791963900",
+  "workflow_created_at": "2026-10-14T07:47:23Z",
+  "workflow_started_at": "2026-10-14T07:47:23Z",
+  "admitted_at": "2026-10-14T15:47:29+08:00",
+  "status": "duplicate_window",
+  "canonical_run_id": "38530425189",
+  "snapshot_timestamp": "2026-10-14T15:45:37+08:00"
+}
