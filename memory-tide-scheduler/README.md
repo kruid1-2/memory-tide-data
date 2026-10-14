@@ -4,7 +4,7 @@
 
 ## 当前交付状态
 
-代码、本地测试及 Wrangler dry-run 已完成。**Cloudflare 账号授权、Worker 首次部署与 UTC Cron 注册已完成；Secret 尚未设置，真实分发和8窗口采样尚未验收。** `DISPATCH_ENABLED=false` 防止凭据配置前意外分发。现有 GitHub schedule 仍保留，验收全部通过前不能移除。实际证据状态见 [TEST_REPORT.md](TEST_REPORT.md)。
+代码、本地测试及 Wrangler dry-run 已完成。**Cloudflare 账号授权、Worker 首次部署与 UTC Cron 注册已完成；Secret名称已设置，但实际探针被GitHub以HTTP401拒绝；已修复重定向运行时兼容性，分发暂时关闭，等待重新隐藏输入有效凭据。8窗口采样尚未开始。** `DISPATCH_ENABLED=false` 防止凭据配置前意外分发。现有 GitHub schedule 仍保留，验收全部通过前不能移除。实际证据状态见 [TEST_REPORT.md](TEST_REPORT.md)。
 
 ## 账号与安全设置
 

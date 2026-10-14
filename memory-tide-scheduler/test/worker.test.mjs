@@ -14,7 +14,7 @@ test('cron uses fixed GitHub endpoint/ref and stable window; accepted is not col
  assert.equal(r.status,'dispatch_accepted');assert.equal(r.run_id,123);
  const {url,opts}=d.calls[0];assert.equal(url,'https://api.github.com/repos/kruid1-2/memory-tide-data/actions/workflows/collect-weibo.yml/dispatches');
  const body=JSON.parse(opts.body);assert.equal(body.ref,'main');assert.equal(body.inputs.trigger_source,'cloudflare-cron');assert.equal(body.inputs.scheduled_at,'2026-10-14T06:00:00.000Z');
- assert.equal(body.inputs.dispatch_id,'cf-1791957600');assert.equal(opts.redirect,'error');
+ assert.equal(body.inputs.dispatch_id,'cf-1791957600');assert.equal(opts.redirect,'manual');
  assert.ok(!JSON.stringify(d.logs).includes(env.GITHUB_DISPATCH_TOKEN));
 });
 test('retries 5xx/timeout finitely with same id and never logs raw errors',async()=>{
@@ -44,4 +44,15 @@ test('no public dispatch endpoint; probe requires separate secret',async()=>{
 test('Retry-After beyond retry budget fails without hammering GitHub',async()=>{
  const d=deps([new Response('',{status:429,headers:{'retry-after':'120'}})]);
  await assert.rejects(dispatch(when,env,'cloudflare-cron',d));assert.equal(d.calls.length,1);
+});
+test('runtime failure classification never serializes raw credential-bearing message',async()=>{
+ const d=deps([new TypeError('Illegal invocation: '+env.GITHUB_DISPATCH_TOKEN)]);
+ await assert.rejects(dispatch(when,env,'cloudflare-cron',d));
+ assert.equal(d.logs.find(x=>x.status==='attempt_failed').error_kind,'runtime_binding');
+ assert.ok(!JSON.stringify(d.logs).includes(env.GITHUB_DISPATCH_TOKEN));
+});
+
+test('redirect response is never followed or retried',async()=>{
+ const d=deps([new Response(null,{status:302,headers:{location:'https://untrusted.example'}})]);
+ await assert.rejects(dispatch(when,env,'cloudflare-cron',d));assert.equal(d.calls.length,1);assert.equal(d.calls[0].opts.redirect,'manual');
 });

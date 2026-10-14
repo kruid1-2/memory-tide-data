@@ -34,3 +34,13 @@
 系统curl正常TLS校验：公开根路径返回404，未授权POST /probe返回401。此项只证明服务已部署及访问控制有效，不是GitHub分发成功。原Python探针在本机遇到CA信任错误，已改用系统curl，密钥通过stdin提供，不在参数、文件或日志中传递；2项回归测试通过，未禁用证书验证。
 
 实际服务URL和私有部署检查细节仅保留本地 `reports/deployment.json`，不公开账号邮箱/账号ID。下一步需用户通过隐藏输入设置Fine-grained PAT Secret，然后才开启分发、验证Worker API路径并观察8个连续窗口。
+
+## Secret设置后的真实探针与失败诊断（2026-10-14）
+
+两个Secret名称（GITHUB_DISPATCH_TOKEN、SCHEDULER_ADMIN_KEY）已从Cloudflare读回；值没有读取或输出。本地探针凭据权限600。
+
+- 首次开启后的真实探针在收到HTTP响应前失败。13:30窗口的真实Cron也按三次有限重试失败，不能记为成功窗口。日志只保存受控分类，未输出异常原文或Token。
+- 增加白名单分类后定位为运行时选项不兼容；只把redirect:error改为redirect:manual并对所有3xx拒绝，不跨站转发Authorization。新版实际请求已取得GitHub HTTP401，证明原选项错误已消除，但凭据未被GitHub接受。Token无首尾空白，复制是否完整或凭据是否有效尚未确认，不将其误报为仓库权限故障。
+- 已增加上传前GitHub身份检查：自己的终端隐藏输入，凭据只经stdin传给系统curl，响应正文丢弃；只有HTTP200才更新Cloudflare Secret，错误仅输出HTTP码。不会读取聊天或剪贴板。
+- 当前Cloudflare分发暂时关闭（Cron保留），避免持续401；GitHub原生schedule仍开启。8连续窗口验收尚未开始，等待用户重新隐藏输入有效凭据。真实初步日志位于本地reports/cloudflare-live.jsonl，白名单提取位于reports/preliminary_logs.json，不公开账号信息或请求头。
+- Worker现有9项测试、探针2项回归测试通过；原Python41项此前通过。

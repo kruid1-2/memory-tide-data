@@ -92,13 +92,13 @@
     },
     {
       "path": "memory-tide-scheduler/src/index.mjs",
-      "bytes": 3761,
-      "sha256": "cfdec6d6fd2fac1f35fb04718ad8c1553ea0c4b401a8e8ef3a87daae959e8c7b"
+      "bytes": 4216,
+      "sha256": "55d632ebb51e125f5a3c70e1582889de7145144889c6879f712153f6846e1c3c"
     },
     {
       "path": "memory-tide-scheduler/test/worker.test.mjs",
-      "bytes": 3668,
-      "sha256": "99b8ba451b69a74a6a5180a21465a6758eed3a5836ec73f0ba415816c6ac559e"
+      "bytes": 4386,
+      "sha256": "b21450c678eb4096a5b432e6f834868ffe1a665a4ab1773aedbcb2d01cc1b7b1"
     },
     {
       "path": "memory-tide-scheduler/test/test_probe.py",
@@ -107,8 +107,8 @@
     },
     {
       "path": "memory-tide-scheduler/tools/setup_secrets.py",
-      "bytes": 1070,
-      "sha256": "61e9e852051c90eb9e66927429f98f6e2177ca8b9facde35f2274980d8666722"
+      "bytes": 2350,
+      "sha256": "a39237cc1ef4fc5b7d38759efc55c7c2ba8ea9879ced2c07d66c7a945c1e5f75"
     },
     {
       "path": "memory-tide-scheduler/tools/probe.py",
@@ -117,13 +117,13 @@
     },
     {
       "path": "memory-tide-scheduler/README.md",
-      "bytes": 7651,
-      "sha256": "6901060e8af6a2e97c15c6e1aca5e2fe955d3259389d1c76240081e96cc84667"
+      "bytes": 7780,
+      "sha256": "7966b538ae8b57a90015dce10dd1771c77dd67057215711574bec97e3d99759e"
     },
     {
       "path": "memory-tide-scheduler/TEST_REPORT.md",
-      "bytes": 3704,
-      "sha256": "bbd6ee7007b3b4784664b59425015e15a3e02ffc6fefe3b5cb6def0ac0cc48f7"
+      "bytes": 5167,
+      "sha256": "75a022ac3886483fc4b415ac14daeee6ba71941c05c8ebaa47b67f493b231080"
     },
     {
       "path": "memory-tide-scheduler/DESIGN.md",
@@ -132,8 +132,8 @@
     },
     {
       "path": "memory-tide-data/LIVE_README.md",
-      "bytes": 12784,
-      "sha256": "8e8759bc1953db02a6d4e45d4bf3cfefab7b64d786fbe6cce19edc6686a79dc4"
+      "bytes": 12828,
+      "sha256": "00e5d94ad8ffa468b13f42a2cd0be4c7ad3ecf59213740abe665bea4aef1797f"
     },
     {
       "path": "memory-tide-data/LIVE_TEST_REPORT.md",
@@ -142,8 +142,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 12798,
-      "sha256": "d4f5c8cf96e62ee0b47650847f7f9de28b5932039755ed9c9e5cd002519ec798"
+      "bytes": 12842,
+      "sha256": "096fb554f4fe3b964df6c652277a461d0a350d538f34d0698f5fae9f3310aaa4"
     },
     {
       "path": ".gitignore",

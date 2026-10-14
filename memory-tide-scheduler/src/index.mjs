@@ -19,7 +19,7 @@ export async function dispatch(scheduledTime,env,source='cloudflare-cron',overri
   const abort=new AbortController();const timer=setTimeout(()=>abort.abort(),d.timeoutMs);
   let response,errorKind='network_or_timeout';
   try {
-   response=await d.fetch(API,{method:'POST',redirect:'error',signal:abort.signal,
+   response=await d.fetch(API,{method:'POST',redirect:'manual',signal:abort.signal,
     headers:{Authorization:`Bearer ${env.GITHUB_DISPATCH_TOKEN}`,'Content-Type':'application/json',Accept:'application/vnd.github+json','User-Agent':'MEMORY-TIDE-Scheduler/1.0','X-GitHub-Api-Version':'2026-03-10'},body});
    if(response.status===200 || response.status===204) {
     let runId=null;
@@ -28,10 +28,17 @@ export async function dispatch(scheduledTime,env,source='cloudflare-cron',overri
     return {status:'dispatch_accepted',dispatch_id:id,run_id:runId};
    }
    errorKind='http';
-  } catch { /* Never serialize arbitrary errors: they can include request headers. */ }
+  } catch (error) {
+   // Match only controlled categories; never emit arbitrary messages or headers.
+   const message=String(error?.message??'');
+   if(/illegal invocation/i.test(message))errorKind='runtime_binding';
+   else if(/header|invalid.*character/i.test(message))errorKind='invalid_header';
+   else if(/redirect|signal/i.test(message))errorKind='unsupported_option';
+   else if(error instanceof ReferenceError)errorKind='runtime_reference';
+  }
   finally {clearTimeout(timer);}
   const status=response?.status??null;
-  log('attempt_failed',{attempt,http_status:status,error_kind:errorKind});
+  log('attempt_failed',{attempt,http_status:status,error_kind:errorKind,token_has_outer_whitespace:env.GITHUB_DISPATCH_TOKEN!==env.GITHUB_DISPATCH_TOKEN.trim()});
   const limited=status===429 || (status===403 && (response.headers.has('retry-after') || response.headers.get('x-ratelimit-remaining')==='0'));
   const transient=!response || status>=500 || limited;
   let waitSeconds=2**attempt;
