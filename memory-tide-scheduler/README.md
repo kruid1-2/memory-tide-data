@@ -4,7 +4,7 @@
 
 ## 当前交付状态
 
-代码、本地测试及 Wrangler dry-run 已完成。**尚未完成 Cloudflare 账号授权、Secret 设置、实际部署或8窗口采样验收。** `DISPATCH_ENABLED=false` 防止凭据配置前意外分发。现有 GitHub schedule 仍保留，验收全部通过前不能移除。实际证据状态见 [TEST_REPORT.md](TEST_REPORT.md)。
+代码、本地测试及 Wrangler dry-run 已完成。**Cloudflare 账号授权、Worker 首次部署与 UTC Cron 注册已完成；Secret 尚未设置，真实分发和8窗口采样尚未验收。** `DISPATCH_ENABLED=false` 防止凭据配置前意外分发。现有 GitHub schedule 仍保留，验收全部通过前不能移除。实际证据状态见 [TEST_REPORT.md](TEST_REPORT.md)。
 
 ## 账号与安全设置
 
@@ -67,6 +67,6 @@ Cloudflare输入dispatch_id固定为 `cf-UTC_WINDOW_EPOCH`，重试一致。来�
 
 ## 验证
 
-`npm test`、`npm run check`；在memory-tide-data内运行 `python3 -m unittest discover -s tests -v`；工作流用actionlint校验。测试fixture只在临时目录，不写真实data分支。
+`npm test`、`npm run check`、`python3 -m unittest discover -s test -p test_probe.py -v`；在memory-tide-data内运行 `python3 -m unittest discover -s tests -v`；工作流用actionlint校验。测试fixture只在临时目录，不写真实data分支。
 
 官方参考：[Cron](https://developers.cloudflare.com/workers/configuration/cron-triggers/)、[Secrets](https://developers.cloudflare.com/workers/configuration/secrets/)、[Workers Logs](https://developers.cloudflare.com/workers/observability/logs/workers-logs/)、[GitHub dispatch API](https://docs.github.com/en/rest/actions/workflows#create-a-workflow-dispatch-event)。
