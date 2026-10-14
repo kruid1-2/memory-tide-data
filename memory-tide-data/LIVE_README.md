@@ -1,10 +1,12 @@
 # MEMORY TIDE — GitHub Actions 实时采集
 
-基于已有历史数据工程新增的离线运行采集器：每 15 分钟请求一次微博官方桌面热搜，保存真实响应、规范化快照、相邻观测端点变化及运行状态。本功能不修改前端，也不上传/重建历史 SQLite 数据库。
+基于已有历史数据工程新增的离线运行采集器：配置为每 15 分钟请求一次微博官方桌面热搜，保存真实响应、规范化快照、相邻观测端点变化及运行状态。本功能不修改前端，也不上传/重建历史 SQLite 数据库。
 
 ## 当前状态
 
-已部署到公开仓库 [kruid1-2/memory-tide-data](https://github.com/kruid1-2/memory-tide-data)。[首次手动执行](https://github.com/kruid1-2/memory-tide-data/actions/runs/38346457723)已成功，远程原始响应及快照已读回核对；15 分钟计划配置和仓库变量已开启，但截至 2026-10-13 14:06:55（北京时间）仍没有任何 schedule 事件，自动触发尚未验证通过。已重新启用工作流，并提交一分钟偏移的 cron 更新作为调度恢复尝试。至少四次真实计划执行的核验继续检查实际 schedule 事件，最新结果见 [LIVE_TEST_REPORT.md](LIVE_TEST_REPORT.md)。
+已部署到公开仓库 [kruid1-2/memory-tide-data](https://github.com/kruid1-2/memory-tide-data)。截至 2026-10-14 12:34（北京时间），[首次手动执行](https://github.com/kruid1-2/memory-tide-data/actions/runs/38346457723)和 **四次真实 schedule 执行**均通过成功步骤、远程原始响应 SHA256、重新解析快照及永久保存核验。最后成功采集为 **2026-10-14T10:12:26+08:00**；工作流 active、WEIBO_SCHEDULE_ENABLED=true，15 分钟 cron 配置保持开启。有限四次核验任务交付后暂停。
+
+**实际采样严重稀疏：四次之间约 5小时57分、3小时26分、2小时26分，不是连续 15 分钟记录。** 自动触发和保存链路已实证可用，但调度稳定性尚未达标，不能承诺持续每15分钟取得数据。不得补写未发生的采集。完整运行链接、采样条数、来源、SHA256 与诊断见 [LIVE_TEST_REPORT.md](LIVE_TEST_REPORT.md)。
 
 直接查看 [Actions](https://github.com/kruid1-2/memory-tide-data/actions/workflows/collect-weibo.yml)、[最新状态](https://github.com/kruid1-2/memory-tide-data/blob/data/observations/status.json)及[历史快照](https://github.com/kruid1-2/memory-tide-data/tree/data/observations/snapshots)。
 
@@ -39,7 +41,7 @@ gh variable set WEIBO_SCHEDULE_ENABLED --body true --repo OWNER/REPO
 gh variable set WEIBO_SCHEDULE_ENABLED --body false --repo OWNER/REPO
 ```
 
-本仓库已启用该变量；不需要再次开启。active 状态与变量 true 只能确认配置，不能证明 GitHub 内部调度已投递。有限核验 heartbeat 每 10 分钟检查，每次报告 N/4、最后成功采集时间及异常；达到四次真实核验后暂停该核验任务，保留 GitHub 采集开启。复核计划执行证据可以在 memory-tide-data 目录运行 `python3 deployment/verify_cloud.py --repo kruid1-2/memory-tide-data --manual-id 38346457723`，需要已登录的 gh CLI。结果保存到本地 live/cloud_verification.json。
+本仓库已启用该变量；不需要再次开启。active 状态与变量 true 只能确认配置，不能证明 GitHub 内部调度已投递。有限核验 heartbeat 曾每 10 分钟检查并逐次报告 N/4、最后成功采集时间及异常；已达到四次，交付后暂停该核验任务，保留 GitHub 采集开启。复核计划执行证据可以在 memory-tide-data 目录运行 `python3 deployment/verify_cloud.py --repo kruid1-2/memory-tide-data --manual-id 38346457723`，需要已登录的 gh CLI。结果保存到本地 live/cloud_verification.json。
 
 `WEIBO_SCHEDULE_ENABLED` 初始未设置，所以 schedule 的采集 job 跳过；手动 job 正常运行。启用后观察至少四次 `event=schedule`、有采集 job 实际成功且 data 分支保存对应 run_id 的结果；skipped、失败和手动运行都不能计入四次成功验证。示例中的 main 需替换成仓库实际默认分支。
 
