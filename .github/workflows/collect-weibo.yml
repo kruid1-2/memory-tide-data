@@ -1,7 +1,26 @@
 name: MEMORY TIDE - Collect Weibo
+run-name: Weibo ${{ inputs.trigger_source || github.event_name }} ${{ inputs.dispatch_id || github.run_id }}
 
 on:
   workflow_dispatch:
+    inputs:
+      trigger_source:
+        description: Dispatch source (manual / cloudflare-cron / cloudflare-probe)
+        type: choice
+        options: [manual, cloudflare-cron, cloudflare-probe]
+        default: manual
+      scheduled_at:
+        description: UTC 15-minute window start (Cloudflare only)
+        type: string
+        default: ''
+      dispatched_at:
+        description: Worker actual dispatch time UTC (Cloudflare only)
+        type: string
+        default: ''
+      dispatch_id:
+        description: Stable window dispatch identity (Cloudflare only)
+        type: string
+        default: ''
   schedule:
     # Every 15 minutes (UTC). Shifted one minute on 2026-10-13 to refresh
     # GitHub schedule registration after no schedule events were delivered.
@@ -9,6 +28,7 @@ on:
 
 permissions:
   contents: write
+  actions: read
 
 concurrency:
   group: memory-tide-weibo-data-writer
@@ -31,7 +51,9 @@ jobs:
 
       - name: Test reusable cleaning and collection behavior
         working-directory: memory-tide-data
-        run: python3 -m unittest discover -s tests -p 'test_live_collection.py' -v
+        run: |
+          python3 -m unittest discover -s tests -p 'test_live_collection.py' -v
+          python3 -m unittest discover -s tests -p 'test_scheduler_gate.py' -v
 
       - name: Restore persistent data branch
         run: bash memory-tide-data/deployment/restore_data.sh
@@ -41,14 +63,8 @@ jobs:
         continue-on-error: true
         working-directory: memory-tide-data
         env:
-          RUN_ID: ${{ github.run_id }}
-          RUN_ATTEMPT: ${{ github.run_attempt }}
-          EVENT_NAME: ${{ github.event_name }}
-        run: |
-          python3 -m memory_tide.live collect \
-            --root "$DATA_DIR/observations" --run-id "$RUN_ID" \
-            --attempt "$RUN_ATTEMPT" --event "$EVENT_NAME" \
-            --outbox "$GITHUB_WORKSPACE/_collection-outbox"
+          OUTBOX_DIR: ${{ github.workspace }}/_collection-outbox
+        run: python3 deployment/scheduled_collect.py
 
       - name: Verify saved response and last successful snapshot
         if: ${{ always() && steps.collect.outcome != 'skipped' }}

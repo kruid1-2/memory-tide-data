@@ -15,3 +15,10 @@ lines=['# MEMORY TIDE collection',
        f'- [Latest trends]({base}/blob/data/observations/latest_trends.json)']
 if state.get('last_error'):lines.append('- Error: '+state['last_error']['type'])
 with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:f.write('\n'.join(lines)+'\n')
+
+provenance=Path(os.environ['DATA_DIR'])/'observations/scheduler/runs'/os.environ['GITHUB_RUN_ID']/(os.environ['GITHUB_RUN_ATTEMPT']+'.json')
+if provenance.exists():
+    admission=json.loads(provenance.read_text())
+    with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:
+        for key in ('trigger_source','dispatch_id','scheduled_at','workflow_started_at','status','canonical_run_id','snapshot_timestamp'):
+            f.write(f"- Scheduler {key}: {admission.get(key)}\n")

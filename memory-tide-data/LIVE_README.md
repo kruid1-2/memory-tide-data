@@ -115,3 +115,7 @@ bash -n deployment/restore_data.sh deployment/persist_data.sh
 | quota / billing 失败 | 看账户 Actions 使用额度和预算；本功能不修改付费设置 |
 
 15 分钟约为每天 96 次任务。公共仓库标准 GitHub-hosted runner 免费；私有仓库消耗账户每月额度，Free 为 2,000 分钟、Pro 为 3,000 分钟，超额是否计费取决付费方式和预算。不能把私人项目自动改公开或未经确认启用额外付费。来源：[GitHub Actions 计费文档](https://docs.github.com/en/billing/concepts/product-billing/github-actions)。
+
+## Cloudflare 调度迁移（2026-10-14）
+
+已新增独立 [memory-tide-scheduler](../memory-tide-scheduler/README.md) 代码、本地测试、共享15分钟窗口去重和8个连续窗口对账脚本。Cloudflare账号登录及Fine-grained Token Secret待设置，尚未部署/取得真实8窗口结果。原生schedule保留直至验收通过；现有解析、快照原子保存和data分支不重建。详见调度项目TEST_REPORT.md。

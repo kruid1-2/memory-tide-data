@@ -1,0 +1,15 @@
+{
+  "name": "memory-tide-scheduler",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "login": "wrangler login",
+    "whoami": "wrangler whoami",
+    "check": "wrangler deploy --dry-run --outdir .dry-run",
+    "deploy": "wrangler deploy",
+    "logs": "wrangler tail --format json"
+  },
+  "devDependencies": {"wrangler": "4.150.0"}
+}

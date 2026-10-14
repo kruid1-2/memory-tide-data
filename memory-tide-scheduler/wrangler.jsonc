@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "memory-tide-scheduler",
+  "main": "src/index.mjs",
+  "compatibility_date": "2026-10-14",
+  "workers_dev": true,
+  "preview_urls": false,
+  "triggers": {"crons": ["*/15 * * * *"]},
+  "vars": {"DISPATCH_ENABLED": "false"},
+  "observability": {"enabled": true, "head_sampling_rate": 1}
+}
