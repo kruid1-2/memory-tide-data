@@ -61,6 +61,16 @@
       "sha256": "91e1a6e7e89eb5966668f40715f6dbfee6a91186f149cd24b79bb4801f06d15b"
     },
     {
+      "path": "memory-tide-data/deployment/normalize_worker_logs.py",
+      "bytes": 3313,
+      "sha256": "1abd19398466a5167bb12c29944af54ec8d126312099ffc7900a3bc0a5e726d4"
+    },
+    {
+      "path": "memory-tide-data/tests/test_worker_log_capture.py",
+      "bytes": 1405,
+      "sha256": "6955b3a06c73d820cb2e6ae1564fbd8d68fa2130fa0f75823efc999bc03935bd"
+    },
+    {
       "path": "memory-tide-data/tests/test_scheduler_gate.py",
       "bytes": 3369,
       "sha256": "7e8e262ada70bf3f98a82a9ca3d1c8cad7e497f84fdd6282d4c3109084a3bf89"
@@ -117,13 +127,13 @@
     },
     {
       "path": "memory-tide-scheduler/README.md",
-      "bytes": 8141,
-      "sha256": "ef7c1962d3c44c6335e347a8f48009e6b907c7c8095ddfddefb70e65ef17dd0b"
+      "bytes": 8896,
+      "sha256": "414657b1b96fd5035e10777cef4565bbec02f007cb700b53da0fe6540a5e84ae"
     },
     {
       "path": "memory-tide-scheduler/TEST_REPORT.md",
-      "bytes": 7694,
-      "sha256": "ac6d0dbb9eda0029d747375bcb604df9046ac185c1c5b96533b63e4c3594f9d7"
+      "bytes": 9022,
+      "sha256": "f443b739b56cd6b735b4efa51048001d8f46145a4c11c7ff007ef08556b35556"
     },
     {
       "path": "memory-tide-scheduler/ACTUAL_TRIGGER_LOGS.jsonl",

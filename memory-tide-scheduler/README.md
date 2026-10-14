@@ -35,9 +35,14 @@ python3 tools/probe.py https://memory-tide-scheduler.YOUR-SUBDOMAIN.workers.dev
 
 ```sh
 cd ../memory-tide-data
+python3 deployment/normalize_worker_logs.py \
+  ../memory-tide-scheduler/reports/cloudflare-live.jsonl \
+  ../memory-tide-scheduler/reports/cloudflare-stream-2.jsonl \
+  --out ../memory-tide-scheduler/reports/cloudflare-evidence.jsonl \
+  --report live/log_capture_quality.json
 python3 deployment/verify_scheduler.py \
   --start 2026-10-14T08:00:00Z --count 8 \
-  --logs ../memory-tide-scheduler/reports/cloudflare-live.jsonl \
+  --logs ../memory-tide-scheduler/reports/cloudflare-evidence.jsonl \
   --out live/cloudflare_windows.json
 ```
 
@@ -72,3 +77,5 @@ Cloudflare输入dispatch_id固定为 `cf-UTC_WINDOW_EPOCH`，重试一致。来�
 `npm test`、`npm run check`、`python3 -m unittest discover -s test -p test_probe.py -v`；在memory-tide-data内运行 `python3 -m unittest discover -s tests -v`；工作流用actionlint校验。测试fixture只在临时目录，不写真实data分支。
 
 官方参考：[Cron](https://developers.cloudflare.com/workers/configuration/cron-triggers/)、[Secrets](https://developers.cloudflare.com/workers/configuration/secrets/)、[Workers Logs](https://developers.cloudflare.com/workers/observability/logs/workers-logs/)、[GitHub dispatch API](https://docs.github.com/en/rest/actions/workflows#create-a-workflow-dispatch-event)。
+
+日志捕获故障：两个旧tail进程已断线退出，原日志保留。新增normalize_worker_logs.py仅提取完整真实console对象，遇到损坏/截断立即停止该文件并显式报告偏移和SHA256；不修补事件。新的单一tail追加cloudflare-stream-2.jsonl。验收读取去重白名单副本cloudflare-evidence.jsonl，缺失日志的窗口仍不能通过。服务端历史日志只读查询返回403时，不擅自扩大权限或凭空补证。

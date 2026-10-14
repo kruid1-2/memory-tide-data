@@ -60,3 +60,11 @@
 - 已启用本聊天的ACTIVE heartbeat `memory-tide`（Cloudflare连续8窗口验收），每10分钟读取真实日志及远程快照报告结果。Wrangler tail仍为实际运行的本机长进程；若机器休眠或日志断开，核验必须标记缺证并修复，不能伪造。
 
 原生schedule仅在8个固定窗口全部核对成功、完整观察时段结束且文档交付后移除。
+
+## 首次周期核验与日志捕获故障
+
+两个原Wrangler tail连接断线并在重连5次后退出，原始文件末尾出现非JSON断线提示；首次周期验收因此未完成，旧基线未当成新检查。完整可解析对象中保留真实14:00的dispatch_accepted日志。新增normalize_worker_logs.py在损坏边界停止提取，记录原文件SHA256、有效JSON对象数及损坏偏移；不修改原始日志，不修造事件，HTTP请求头不进入校验副本。2项回归测试通过。新单一tail为session7997，追加cloudflare-stream-2.jsonl。
+
+14:00窗口运行 [38519715301](https://github.com/kruid1-2/memory-tide-data/actions/runs/38519715301)已完整通过：来源cloudflare-cron，计划14:00:00、实际分发14:00:27.888、GitHub创建14:00:28、job开始14:00:32、实际采集14:00:36、持久化完成14:00:37（均北京时间）；53话题/50排名，原始SHA256 `d479b223edfc850df7ead0e2b7f05851d6d50a6141d495a5b910553b74fa40a9`。
+
+14:15窗口运行38521153022存在成功快照，但缺少Cloudflare console日志，暂不计完整通过。服务端历史日志查询返回HTTP403/code10000，仅是查询权限不足，不是GitHub采集凭据错误；没有扩大授权或生成替代证据。固定实验起止时间仍保持14:00–16:00，原生schedule继续保留。
