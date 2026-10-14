@@ -21,7 +21,9 @@ def summarize(start,count,records,checked):
     successful=sum(w['status']=='success' for w in windows)
     return dict(schema_version='1',checked_at=utc(checked),expected_interval_seconds=900,target_windows=count,
                 successful_windows=successful,missing_windows=sum(w['status']=='missing_or_unverified' for w in windows),
-                pending_windows=sum(w['status']=='pending' for w in windows),complete=successful==count,
+                pending_windows=sum(w['status']=='pending' for w in windows),
+                observation_start_at=utc(start),observation_end_at=utc(start+900*count),
+                complete=successful==count and checked>=start+900*count,
                 sampling_intervals_seconds=[b-a for a,b in zip(times,times[1:])],windows=windows)
 
 
@@ -81,6 +83,8 @@ def audit(repo,start,count,logs):
                           persistence_confirmed_at=persisted[-1],cloudflare_log_verified=True,
                           trigger_delay_seconds=epoch(metadata['dispatched_at'])-slot,
                           github_start_delay_seconds=epoch(run['run_started_at'])-slot,
+                          job_started_at=min(job['started_at'] for job in jobs if job.get('started_at')),
+                          runner_queue_seconds=min(epoch(job['started_at']) for job in jobs if job.get('started_at'))-epoch(run['created_at']),
                           sample_delay_seconds=sample-slot,persistence_delay_seconds=epoch(persisted[-1])-slot)
         except Exception as exc:
             # subprocess error text can include commands; only expose controlled type/message.

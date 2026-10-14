@@ -13,3 +13,11 @@ class ReportTests(unittest.TestCase):
   rows=[dict(slot=0,verified=True,trigger_source='cloudflare-cron',snapshot_epoch=10)]*2
   rows+=[dict(slot=900,verified=True,trigger_source='cloudflare-cron',snapshot_epoch=1801)]
   r=summarize(0,2,rows,3000);self.assertEqual(r['successful_windows'],1);self.assertFalse(r['complete'])
+
+class ObservationDurationTests(unittest.TestCase):
+ def test_last_sample_does_not_finish_a_window_before_it_ends(self):
+  rows=[dict(slot=i*900,verified=True,trigger_source='cloudflare-cron',snapshot_epoch=i*900+10) for i in range(8)]
+  self.assertFalse(summarize(0,8,rows,6311)['complete'])
+ def test_eight_verified_windows_pass_after_observation_end(self):
+  rows=[dict(slot=i*900,verified=True,trigger_source='cloudflare-cron',snapshot_epoch=i*900+10) for i in range(8)]
+  self.assertTrue(summarize(0,8,rows,7201)['complete'])

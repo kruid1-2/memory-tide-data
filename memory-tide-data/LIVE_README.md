@@ -118,4 +118,4 @@ bash -n deployment/restore_data.sh deployment/persist_data.sh
 
 ## Cloudflare 调度迁移（2026-10-14）
 
-已新增独立 [memory-tide-scheduler](../memory-tide-scheduler/README.md) 代码、本地测试、共享15分钟窗口去重和8个连续窗口对账脚本。Cloudflare账号授权及Worker首次部署已完成，Secret已设置但真实探针返回GitHub401，分发暂时关闭，等待凭据重新验证；尚未取得真实8窗口结果。原生schedule保留直至验收通过；现有解析、快照原子保存和data分支不重建。详见调度项目TEST_REPORT.md。
+已新增独立 [memory-tide-scheduler](../memory-tide-scheduler/README.md) 代码、本地测试、共享15分钟窗口去重和8个连续窗口对账脚本。Cloudflare账号授权及Worker首次部署已完成，Secret重新验证后Worker真实探针38518846120已通过（2026-10-14T13:51:03+08:00，52话题/50排名，原始字节与持久化均核对）。Cloudflare分发已开启，固定北京时间14:00–16:00的连续8窗口验收与每10分钟核验已启动，尚未完成。原生schedule保留直至验收通过；现有解析、快照原子保存和data分支不重建。详见调度项目TEST_REPORT.md。

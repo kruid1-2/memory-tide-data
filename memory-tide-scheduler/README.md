@@ -4,7 +4,9 @@
 
 ## 当前交付状态
 
-代码、本地测试及 Wrangler dry-run 已完成。**Cloudflare 账号授权、Worker 首次部署与 UTC Cron 注册已完成；Secret名称已设置，但实际探针被GitHub以HTTP401拒绝；已修复重定向运行时兼容性，分发暂时关闭，等待重新隐藏输入有效凭据。8窗口采样尚未开始。** `DISPATCH_ENABLED=false` 防止凭据配置前意外分发。现有 GitHub schedule 仍保留，验收全部通过前不能移除。实际证据状态见 [TEST_REPORT.md](TEST_REPORT.md)。
+代码、本地测试、Cloudflare账号授权、Secret设置、Worker部署及一次真实API探针均已通过。[探针38518846120](https://github.com/kruid1-2/memory-tide-data/actions/runs/38518846120)已核对原始响应、52条话题/50排名及data分支持久化，采集时间为2026-10-14T13:51:03+08:00，来源cloudflare-probe，不计Cron窗口。
+
+**固定北京时间2026-10-14 14:00–16:00的连续8窗口仍在验收，尚未完成。** 分发开关实际为true、UTC Cron为*/15。源码默认DISPATCH_ENABLED=false用于防止未授权环境误分发；线上开启需显式部署覆盖。真实日志和核验heartbeat已启动，每10分钟反馈。现有GitHub原生schedule保留，只有固定8窗口全部通过且观察结束后才移除。详见 [TEST_REPORT.md](TEST_REPORT.md) 和脱敏的 [ACTUAL_TRIGGER_LOGS.jsonl](ACTUAL_TRIGGER_LOGS.jsonl)。
 
 ## 账号与安全设置
 
