@@ -6,7 +6,9 @@
 
 代码、本地测试、Cloudflare账号授权、Secret设置、Worker部署及一次真实API探针均已通过。[探针38518846120](https://github.com/kruid1-2/memory-tide-data/actions/runs/38518846120)已核对原始响应、52条话题/50排名及data分支持久化，采集时间为2026-10-14T13:51:03+08:00，来源cloudflare-probe，不计Cron窗口。
 
-**固定北京时间2026-10-14 14:00–16:00的连续8窗口仍在验收，尚未完成。** 分发开关实际为true、UTC Cron为*/15。源码默认DISPATCH_ENABLED=false用于防止未授权环境误分发；线上开启需显式部署覆盖。真实日志和核验heartbeat已启动，每10分钟反馈。现有GitHub原生schedule保留，只有固定8窗口全部通过且观察结束后才移除。详见 [TEST_REPORT.md](TEST_REPORT.md) 和脱敏的 [ACTUAL_TRIGGER_LOGS.jsonl](ACTUAL_TRIGGER_LOGS.jsonl)。
+**固定北京时间2026-10-14 14:00–16:00观察已结束：数据层8/8成功，漏采0；完整独立日志证据只有4/8，验收未通过。** 实际采样间隔892–909秒，采集延迟36–45秒。14:15、15:15、15:30、15:45缺Cloudflare console日志，等待通过控制台补证；不使用后续样本替代。原生GitHub schedule继续保留，未移除。
+
+Cloudflare分发继续开启，UTC Cron为*/15；源码默认开关false用于防止未授权环境误分发。当前数据层、逐运行SHA256、计划/启动/采集/保存时间及缺证标记见 [TEST_REPORT.md](TEST_REPORT.md)、[WINDOW_REPORT.json](WINDOW_REPORT.json)；已取得的真实脱敏日志见 [ACTUAL_TRIGGER_LOGS.jsonl](ACTUAL_TRIGGER_LOGS.jsonl)。
 
 ## 账号与安全设置
 
@@ -38,6 +40,7 @@ cd ../memory-tide-data
 python3 deployment/normalize_worker_logs.py \
   ../memory-tide-scheduler/reports/cloudflare-live.jsonl \
   ../memory-tide-scheduler/reports/cloudflare-stream-2.jsonl \
+  ../memory-tide-scheduler/reports/cloudflare-stream-3.jsonl \
   --out ../memory-tide-scheduler/reports/cloudflare-evidence.jsonl \
   --report live/log_capture_quality.json
 python3 deployment/verify_scheduler.py \

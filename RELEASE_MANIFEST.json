@@ -127,18 +127,23 @@
     },
     {
       "path": "memory-tide-scheduler/README.md",
-      "bytes": 8896,
-      "sha256": "414657b1b96fd5035e10777cef4565bbec02f007cb700b53da0fe6540a5e84ae"
+      "bytes": 9188,
+      "sha256": "ac7e29834a6a4fed4bd74f13f02448c218f7ee0b74912cc0eaa846d2312b7510"
     },
     {
       "path": "memory-tide-scheduler/TEST_REPORT.md",
-      "bytes": 9022,
-      "sha256": "f443b739b56cd6b735b4efa51048001d8f46145a4c11c7ff007ef08556b35556"
+      "bytes": 14348,
+      "sha256": "202f98a5566d5a96a32c93270c2c1e8a57df1dc8c0b352058496bdef3831bd89"
+    },
+    {
+      "path": "memory-tide-scheduler/WINDOW_REPORT.json",
+      "bytes": 9121,
+      "sha256": "389abfae8dceff4cfb277bac6cf02c6f79ad7f53ae606254d5e8a6a80a2bd3d9"
     },
     {
       "path": "memory-tide-scheduler/ACTUAL_TRIGGER_LOGS.jsonl",
-      "bytes": 8348,
-      "sha256": "c421c9c196f1e4f84172446fe79fbdf225ab158dae85f4d081ebff1c7207e57c"
+      "bytes": 14514,
+      "sha256": "4bb08f8c50f724042d0aab2ff0f0155afcddab96e61f675dc675d3aeb5911148"
     },
     {
       "path": "memory-tide-scheduler/DESIGN.md",
@@ -147,8 +152,8 @@
     },
     {
       "path": "memory-tide-data/LIVE_README.md",
-      "bytes": 12975,
-      "sha256": "66282011976271da930dd75be99d1698e372bebf94ba77ddc083563315e3a93e"
+      "bytes": 13273,
+      "sha256": "4b6b0483dea6806d9483a53bc921864bd807aefef9b0131dee77791f5fc37547"
     },
     {
       "path": "memory-tide-data/LIVE_TEST_REPORT.md",
@@ -157,8 +162,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 12989,
-      "sha256": "86d0b9a14b020129a89dd4760c01ef11d58a6e761f10dc61454922b57a5759be"
+      "bytes": 13287,
+      "sha256": "ab65a0737a5c474359ce30092697bdaf0b918e7ba2807cead79c3a7ac5c9ad0b"
     },
     {
       "path": ".gitignore",
