@@ -21,3 +21,15 @@ class ObservationDurationTests(unittest.TestCase):
  def test_eight_verified_windows_pass_after_observation_end(self):
   rows=[dict(slot=i*900,verified=True,trigger_source='cloudflare-cron',snapshot_epoch=i*900+10) for i in range(8)]
   self.assertTrue(summarize(0,8,rows,7201)['complete'])
+
+class AuditScopeTests(unittest.TestCase):
+ def test_unrelated_historical_metadata_is_not_downloaded(self):
+  from unittest.mock import patch
+  from deployment.verify_scheduler import audit
+  def api(path):
+   if '/git/trees/' in path:return {'tree':[{'path':'observations/scheduler/runs/123/1.json'}]}
+   if '/actions/workflows/' in path:return {'workflow_runs':[]}
+   self.fail('Unexpected request')
+  with patch('deployment.verify_scheduler.api',side_effect=api), patch('deployment.verify_scheduler.data_file',side_effect=AssertionError('Unrelated metadata downloaded')):
+   result=audit('owner/repo',0,8,[])
+  self.assertEqual(result['successful_windows'],0)

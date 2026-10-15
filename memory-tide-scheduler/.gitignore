@@ -6,3 +6,5 @@ node_modules/
 .probe-key
 reports/*.jsonl
 reports/*.json
+reports/
+__pycache__/

@@ -57,8 +57,8 @@
     },
     {
       "path": "memory-tide-data/deployment/verify_scheduler.py",
-      "bytes": 7446,
-      "sha256": "91e1a6e7e89eb5966668f40715f6dbfee6a91186f149cd24b79bb4801f06d15b"
+      "bytes": 8160,
+      "sha256": "e6010e34059ab924275f70cefc01bcc00a80ce58bc1e0e007fb89d94645769bb"
     },
     {
       "path": "memory-tide-data/deployment/normalize_worker_logs.py",
@@ -77,8 +77,8 @@
     },
     {
       "path": "memory-tide-data/tests/test_scheduler_report.py",
-      "bytes": 1629,
-      "sha256": "50f882fc60214c949a58c1d8fb06c70ee2872da71ddd9b38e72d3a6fe4dd9582"
+      "bytes": 2292,
+      "sha256": "ff6f0a06a8ed7950cd19c8c1e8574431ed0cbabb7809e7c1eca7ea3a2a5f2bc7"
     },
     {
       "path": "memory-tide-scheduler/package.json",
@@ -92,8 +92,8 @@
     },
     {
       "path": "memory-tide-scheduler/.gitignore",
-      "bytes": 94,
-      "sha256": "2bd8a4a9eb18ee69e2a2f24124bfc174771c0d5b6c5da3120e56b75a42d2c794"
+      "bytes": 116,
+      "sha256": "01096e42db6b3407adbc40e8b6359735dfbd0c21d5b5aef4bcb5d0e969bde88a"
     },
     {
       "path": "memory-tide-scheduler/wrangler.jsonc",
@@ -116,6 +116,16 @@
       "sha256": "2eb495defd44a1c3c568ffbc11c9fd2d3058b65c83450f4a30780cdc07e3948b"
     },
     {
+      "path": "memory-tide-scheduler/test/test_capture.py",
+      "bytes": 1073,
+      "sha256": "456f68e54fc54e4ec2fddc43681bb7e7a88e9e99ba0a2c74b23b65ae14e224be"
+    },
+    {
+      "path": "memory-tide-scheduler/tools/capture_logs.py",
+      "bytes": 2721,
+      "sha256": "ecdb2ce0460bd5511d661c89cb695b0a6e999275b4b8b146cd5034745f04533b"
+    },
+    {
       "path": "memory-tide-scheduler/tools/setup_secrets.py",
       "bytes": 2350,
       "sha256": "a39237cc1ef4fc5b7d38759efc55c7c2ba8ea9879ced2c07d66c7a945c1e5f75"
@@ -127,13 +137,13 @@
     },
     {
       "path": "memory-tide-scheduler/README.md",
-      "bytes": 9188,
-      "sha256": "ac7e29834a6a4fed4bd74f13f02448c218f7ee0b74912cc0eaa846d2312b7510"
+      "bytes": 10811,
+      "sha256": "6919f07a52941900f393932dc64c815543f3cb5be7e3d6e487b8c5b73e139aa7"
     },
     {
       "path": "memory-tide-scheduler/TEST_REPORT.md",
-      "bytes": 14348,
-      "sha256": "202f98a5566d5a96a32c93270c2c1e8a57df1dc8c0b352058496bdef3831bd89"
+      "bytes": 15303,
+      "sha256": "1601403fb8ae599fe45097185b244b2c7d910a9432b547f2a344b7ccf76b9cb9"
     },
     {
       "path": "memory-tide-scheduler/WINDOW_REPORT.json",
@@ -152,8 +162,8 @@
     },
     {
       "path": "memory-tide-data/LIVE_README.md",
-      "bytes": 13273,
-      "sha256": "4b6b0483dea6806d9483a53bc921864bd807aefef9b0131dee77791f5fc37547"
+      "bytes": 14228,
+      "sha256": "7abd3d4becd449c6efbb7c040685b2f338266f35e058508f0b177fe07686718b"
     },
     {
       "path": "memory-tide-data/LIVE_TEST_REPORT.md",
@@ -162,8 +172,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 13287,
-      "sha256": "ab65a0737a5c474359ce30092697bdaf0b918e7ba2807cead79c3a7ac5c9ad0b"
+      "bytes": 14242,
+      "sha256": "ee7f3be50327ad4e34df8ac610e12a1a43a3e5b0297d7fe352678c17ec4b97b7"
     },
     {
       "path": ".gitignore",

@@ -3,6 +3,7 @@ import argparse
 import json
 import sys
 from pathlib import Path
+from urllib.parse import urlencode
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from deployment.verify_cloud import api,data_file,verify_run
 from memory_tide.core import epoch,now
@@ -45,12 +46,23 @@ def worker_logs(path):
 
 def audit(repo,start,count,logs):
     # Public repo contents are evidence; the token never appears in audit output.
+    # Filter authoritative GitHub creation times before fetching metadata. Scanning
+    # every past run made each heartbeat grow indefinitely and fail on unrelated
+    # requests. A valid dispatch cannot be created outside this observation range.
+    eligible=set();page=1
+    while True:
+        query=urlencode(dict(event='workflow_dispatch',created=f'{utc(start)}..{utc(start+count*900)}',per_page=100,page=page))
+        batch=api(f'repos/{repo}/actions/workflows/collect-weibo.yml/runs?{query}')['workflow_runs']
+        eligible.update(str(run['id']) for run in batch)
+        if len(batch)<100:break
+        page+=1
     tree=api(f'repos/{repo}/git/trees/data?recursive=1')
     if tree.get('truncated'):raise ValueError('Data tree truncated; cannot certify complete audit')
     records=[]
     for item in tree['tree']:
         name=item['path']
         if not name.startswith('observations/scheduler/runs/') or not name.endswith('.json'):continue
+        if name.split('/')[3] not in eligible:continue
         metadata=json.loads(data_file(repo,name.removeprefix('observations/')))
         if metadata.get('trigger_source')!='cloudflare-cron':continue
         slot=epoch(metadata['scheduled_at'])

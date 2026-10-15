@@ -82,3 +82,17 @@ Cloudflare输入dispatch_id固定为 `cf-UTC_WINDOW_EPOCH`，重试一致。来�
 官方参考：[Cron](https://developers.cloudflare.com/workers/configuration/cron-triggers/)、[Secrets](https://developers.cloudflare.com/workers/configuration/secrets/)、[Workers Logs](https://developers.cloudflare.com/workers/observability/logs/workers-logs/)、[GitHub dispatch API](https://docs.github.com/en/rest/actions/workflows#create-a-workflow-dispatch-event)。
 
 日志捕获故障：两个旧tail进程已断线退出，原日志保留。新增normalize_worker_logs.py仅提取完整真实console对象，遇到损坏/截断立即停止该文件并显式报告偏移和SHA256；不修补事件。新的单一tail追加cloudflare-stream-2.jsonl。验收读取去重白名单副本cloudflare-evidence.jsonl，缺失日志的窗口仍不能通过。服务端历史日志只读查询返回403时，不擅自扩大权限或凭空补证。
+
+## 2026-10-15 正式切换验收（尚未通过）
+
+保留2026-10-14原实验结论：真实数据8/8、漏采0，但独立Cloudflare日志仅4/8；不把缺证推断为成功。用户已授权必要时另做连续验收。新的独立实验固定为2026-10-15 03:00–05:00 UTC（北京时间11:00–13:00），共8个连续15分钟窗口。通过前保留GitHub原生schedule。通过后以实际推送完成之后的下一个完整UTC刻钟为起点，另外固定4个切换后窗口；全部通过再停止临时检查。
+
+本次核验工具只下载实验时段的GitHub运行元数据，避免历史数量增长导致每次核验扫描全部记录。临时日志订阅使用单实例锁并断线自动重连，每次连接保留独立原始文件，损坏会话不会截断后续连接的证据。Worker采集、解析和存储逻辑未改变。云端持久日志设置仍需控制台读回确认；当前没有凭源码配置宣称它已核实。
+
+临时验收日志订阅（需要已完成Wrangler登录）：
+
+```sh
+python3 tools/capture_logs.py
+```
+
+原始会话位于`reports/acceptance-capture/tail-*.jsonl`，连接退出记录位于`connections.jsonl`。该目录整体忽略，禁止上传原始请求头。使用数据项目的`normalize_worker_logs.py`提取console白名单事件，公开报告只包含脱敏事件。这个临时订阅依赖本机在线，不能取代云端Workers Logs。Cloudflare Logs保留期按计划为Free 3天、Paid 7天，应在保留期内导出必要故障证据；见[官方Workers Logs文档](https://developers.cloudflare.com/workers/observability/logs/workers-logs/)。
