@@ -2,8 +2,8 @@
   "files": [
     {
       "path": ".github/workflows/collect-weibo.yml",
-      "bytes": 3817,
-      "sha256": "2182c1359545014603f68c260ce626390b6466c1a259fb09be355649398d387d"
+      "bytes": 3622,
+      "sha256": "9b58a8d7d6b7804e21588b394a169e6eef127450d883fcc19869dc52e8e6635d"
     },
     {
       "path": "memory-tide-data/memory_tide/__init__.py",
@@ -137,13 +137,13 @@
     },
     {
       "path": "memory-tide-scheduler/README.md",
-      "bytes": 10811,
-      "sha256": "6919f07a52941900f393932dc64c815543f3cb5be7e3d6e487b8c5b73e139aa7"
+      "bytes": 11240,
+      "sha256": "6f4276dedd18354cba47be44c811ca46d661c2ae2d3b76d7ea7e76820bf7566b"
     },
     {
       "path": "memory-tide-scheduler/TEST_REPORT.md",
-      "bytes": 15303,
-      "sha256": "1601403fb8ae599fe45097185b244b2c7d910a9432b547f2a344b7ccf76b9cb9"
+      "bytes": 18007,
+      "sha256": "482982ffe5a293e6dc6205d25718ed53312cf01645ba997f90831e245f8fa0d9"
     },
     {
       "path": "memory-tide-scheduler/WINDOW_REPORT.json",
@@ -156,24 +156,34 @@
       "sha256": "4bb08f8c50f724042d0aab2ff0f0155afcddab96e61f675dc675d3aeb5911148"
     },
     {
+      "path": "memory-tide-scheduler/ACCEPTANCE_20261015.json",
+      "bytes": 32666,
+      "sha256": "866cdda31d73f81a03bbd81bfa67f59379fc8ff1e729872ce3411410cb8a6b08"
+    },
+    {
+      "path": "memory-tide-scheduler/ACCEPTANCE_TRIGGER_LOGS.jsonl",
+      "bytes": 4215,
+      "sha256": "5ddbf3c1f35b96790d9e9b7f08e56e3f745b1e6bb543e8cc8bc4f5aa9f12839f"
+    },
+    {
       "path": "memory-tide-scheduler/DESIGN.md",
       "bytes": 2419,
       "sha256": "99f9c6f49fb88d5539d257429049da5d33a8f2e6d7d8040cc3d794ec1515fe57"
     },
     {
       "path": "memory-tide-data/LIVE_README.md",
-      "bytes": 14228,
-      "sha256": "7abd3d4becd449c6efbb7c040685b2f338266f35e058508f0b177fe07686718b"
+      "bytes": 14657,
+      "sha256": "0bb59cc560413a030099ae1f206490340549e989a98c778e217091f03797a553"
     },
     {
       "path": "memory-tide-data/LIVE_TEST_REPORT.md",
-      "bytes": 11124,
-      "sha256": "6c19eb541b0d79780721dafa849cc55ae202cf825e9e72e985f474a2424cb8ab"
+      "bytes": 11553,
+      "sha256": "2dd202085a7a2870146009947201e4790f0d42f5213c7df7f0aedf5e69466f98"
     },
     {
       "path": "README.md",
-      "bytes": 14242,
-      "sha256": "ee7f3be50327ad4e34df8ac610e12a1a43a3e5b0297d7fe352678c17ec4b97b7"
+      "bytes": 14671,
+      "sha256": "3e63ee93ed82828f4f30c2b2607538aca43d7a46bb69ff8b8afe789652e7214e"
     },
     {
       "path": ".gitignore",

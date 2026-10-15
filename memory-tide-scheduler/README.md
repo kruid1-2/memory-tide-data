@@ -96,3 +96,7 @@ python3 tools/capture_logs.py
 ```
 
 原始会话位于`reports/acceptance-capture/tail-*.jsonl`，连接退出记录位于`connections.jsonl`。该目录整体忽略，禁止上传原始请求头。使用数据项目的`normalize_worker_logs.py`提取console白名单事件，公开报告只包含脱敏事件。这个临时订阅依赖本机在线，不能取代云端Workers Logs。Cloudflare Logs保留期按计划为Free 3天、Paid 7天，应在保留期内导出必要故障证据；见[官方Workers Logs文档](https://developers.cloudflare.com/workers/observability/logs/workers-logs/)。
+
+## 2026-10-15 正式切换阶段
+
+新固定11:00–13:00实验已完成真实8/8端到端核验，422话题观测/400排名、漏采0、触发失败0、实际间隔892–908秒；云端Cron和100%持久日志已在控制台读回。本次提交移除GitHub原生schedule，保留workflow_dispatch和固定并发锁。切换后4窗口尚待观察，完整迁移验收尚未结束。原10月14日日志缺证结论继续保留。

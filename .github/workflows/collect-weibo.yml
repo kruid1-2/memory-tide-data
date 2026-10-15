@@ -21,10 +21,6 @@ on:
         description: Stable window dispatch identity (Cloudflare only)
         type: string
         default: ''
-  schedule:
-    # Every 15 minutes (UTC). Shifted one minute on 2026-10-13 to refresh
-    # GitHub schedule registration after no schedule events were delivered.
-    - cron: '8,23,38,53 * * * *'
 
 permissions:
   contents: write
