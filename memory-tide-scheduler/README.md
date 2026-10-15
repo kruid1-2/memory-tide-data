@@ -1,5 +1,8 @@
 # MEMORY TIDE Cloudflare scheduler
 
+> **当前状态：正式验收与切换完成（2026-10-15）。** 切换前8/8及切换后固定4/4均完整通过，漏采0、触发失败0。GitHub原生schedule已移除，workflow_dispatch和工作流保持启用；Cloudflare Cron每15分钟继续触发。最新额外验证采集：2026-10-15T19:30:58+08:00。详情见调度项目TEST_REPORT.md和FINAL_VERIFICATION.json。原缺证实验与后来补证分别保留。
+
+
 独立的 Workers Cron 调度器。UTC `*/15 * * * *` 请求既有 GitHub Actions `workflow_dispatch`，ref 固定 main。微博请求、解析、原子快照和 data 分支逻辑继续复用。此项目不包含前端或历史数据库。
 
 ## 当前交付状态
@@ -100,3 +103,11 @@ python3 tools/capture_logs.py
 ## 2026-10-15 正式切换阶段
 
 新固定11:00–13:00实验已完成真实8/8端到端核验，422话题观测/400排名、漏采0、触发失败0、实际间隔892–908秒；云端Cron和100%持久日志已在控制台读回。本次提交移除GitHub原生schedule，保留workflow_dispatch和固定并发锁。切换后4窗口尚待观察，完整迁移验收尚未结束。原10月14日日志缺证结论继续保留。
+
+## 长期运维与查看状态
+
+- GitHub Actions中的运行名称包含`cloudflare-cron`和窗口ID；事件为workflow_dispatch，人工运行名称为manual。
+- data分支的`observations/status.json`提供最后成功时间和失败状态；原始响应、snapshots、index及scheduler元数据均追加保留。
+- Cloudflare控制台：Worker → 设置 → 触发事件核对Cron；可观察性中Workers日志/保留到仪表板/100%采样已实际确认。
+- GitHub Token于2026-11-13到期，提前安全续期并运行`python3 tools/setup_secrets.py`隐藏输入更新。不要把Token发给任何人或写入仓库。
+- 临时验收日志订阅已结束；云端采集不依赖本机。本次通过是实际观察结果，不代表外部服务永不延迟或故障。

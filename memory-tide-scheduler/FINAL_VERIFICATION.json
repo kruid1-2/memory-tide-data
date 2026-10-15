@@ -1,0 +1,102 @@
+{
+  "schema_version": "1",
+  "checked_at": "2026-10-15T11:35:54.743864+00:00",
+  "complete": true,
+  "repository": "kruid1-2/memory-tide-data",
+  "pre_switch": {
+    "windows": 8,
+    "topic_observations": 422,
+    "rank_observations": 400,
+    "sampling_intervals_seconds": [
+      899,
+      908,
+      892,
+      904,
+      897,
+      901,
+      899
+    ],
+    "interval_min": 892,
+    "interval_max": 908,
+    "interval_mean": 900,
+    "sample_delays_seconds": [
+      57,
+      56,
+      64,
+      56,
+      60,
+      57,
+      58,
+      57
+    ],
+    "missed_samples": 0,
+    "trigger_failures": 0
+  },
+  "post_switch": {
+    "windows": 4,
+    "topic_observations": 212,
+    "rank_observations": 200,
+    "sampling_intervals_seconds": [
+      896,
+      907,
+      893
+    ],
+    "interval_min": 893,
+    "interval_max": 907,
+    "interval_mean": 898.6666666666666,
+    "sample_delays_seconds": [
+      62,
+      58,
+      65,
+      58
+    ],
+    "missed_samples": 0,
+    "trigger_failures": 0
+  },
+  "cutover_commit": "cfaaec5234b1b375bc94bef5ae1e3012395f581f",
+  "native_schedule_removed": true,
+  "workflow_dispatch_retained": true,
+  "workflow_active": true,
+  "native_schedule_events_after_cutover": 0,
+  "cloudflare": {
+    "version": "972899b2-b0d4-4772-a537-da63ddf92d59",
+    "traffic_percent": 100,
+    "cron": "*/15 * * * *",
+    "dispatch_enabled": true,
+    "workers_logs_enabled": true,
+    "persist_to_dashboard": true,
+    "sampling_percent": 100
+  },
+  "latest_verified": {
+    "run_id": 38727867711,
+    "event": "workflow_dispatch",
+    "url": "https://github.com/kruid1-2/memory-tide-data/actions/runs/38727867711",
+    "created_at": "2026-10-15T11:30:50Z",
+    "snapshot_timestamp": "2026-10-15T19:30:58+08:00",
+    "topic_count": 53,
+    "ranked_topic_count": 50,
+    "raw_sha256": "fb5e715fd927094fc204d7e6b35f488e320c41c76132a942705fbb80910f7a1c",
+    "snapshot_path": "snapshots/2026-10-15/193058_38727867711.json",
+    "raw_path": "raw/2026-10-15/193058_38727867711.json",
+    "verified": true
+  },
+  "latest_trigger_source": "cloudflare-cron",
+  "data_branch": {
+    "snapshot_files_at_final_check": 126,
+    "original_manual_retained": true,
+    "original_probe_retained": true
+  },
+  "original_experiment": {
+    "initial_full_evidence_windows": 4,
+    "later_recovered_logs": 4,
+    "recovered_full_verified": 8,
+    "recovery_checked_at": "2026-10-15T06:25:57Z",
+    "original_failure_report_preserved": true
+  },
+  "temporary_log_supervisor_stopped": true,
+  "limitations": [
+    "GitHub Fine-grained Token created by user expires 2026-11-13; rotate safely before expiry.",
+    "External services may delay or fail; finite observation is not a permanent availability guarantee.",
+    "Cloudflare Free Workers Logs retention is 3 days; important failure logs should be exported within retention."
+  ]
+}

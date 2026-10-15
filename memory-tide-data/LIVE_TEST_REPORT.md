@@ -1,5 +1,8 @@
 # GitHub Actions 实时采集测试结果
 
+> **当前状态：正式验收与切换完成（2026-10-15）。** 切换前8/8及切换后固定4/4均完整通过，漏采0、触发失败0。GitHub原生schedule已移除，workflow_dispatch和工作流保持启用；Cloudflare Cron每15分钟继续触发。最新额外验证采集：2026-10-15T19:30:58+08:00。详情见调度项目TEST_REPORT.md和FINAL_VERIFICATION.json。原缺证实验与后来补证分别保留。
+
+
 核验日期：2026-10-14，北京时间。当前阶段：**首次云端手动运行及四次真实 schedule 执行均核验通过；快照永久保存；15 分钟 cron 配置仍开启，但实际调度存在数小时断档，不能视为连续 15 分钟数据。**
 
 仓库：https://github.com/kruid1-2/memory-tide-data

@@ -134,3 +134,33 @@ Cloudflare控制台已实际读回：Cron `*/15 * * * *`，DISPATCH_ENABLED=true
 逐窗计划/分发、GitHub创建/启动/队列、实际采集、持久化完成、原始SHA256和来源见[ACCEPTANCE_20261015.json](ACCEPTANCE_20261015.json)；独立Cloudflare console白名单记录见[ACCEPTANCE_TRIGGER_LOGS.jsonl](ACCEPTANCE_TRIGGER_LOGS.jsonl)。8次均为workflow_dispatch + cloudflare-cron，原生schedule、人工和probe未计入。
 
 本次切换提交仅移除GitHub工作流原生schedule，保留workflow_dispatch、来源输入和固定concurrency，不禁用工作流、不修改采集核心或data历史。切换后4窗口尚待观察，不宣布整个迁移完成。观察起点须在远程切换确认之后固定。
+
+## 2026-10-15 最终验收通过
+
+新固定实验11:00–13:00（北京时间）8/8完整通过；正式切换提交`cfaaec5234b1b375bc94bef5ae1e3012395f581f`已移除原生schedule，保留workflow_dispatch、工作流active和固定concurrency。远程读回与本地工作流字节一致，切换后未出现新的原生schedule事件。
+
+切换后严格固定14:30–15:30的4窗口也已全部通过，212条话题观测/200个排名，漏采0、Cloudflare触发失败0；每窗均由自己的cloudflare-cron分发运行采集，没有借用人工或原生schedule的canonical快照。实际采样间隔896、907、893秒（14分53秒–15分07秒），平均898.667秒；采集延迟62、58、65、58秒。Cloudflare接受请求并非成功标准：已核对真实console日志、GitHub成功步骤、远程原始字节SHA256、重新解析结果及持久化完成时间。
+
+| UTC计划时间 | GitHub运行 | 实际采集北京时间 | 话题/排名 | 采集延迟秒 |
+|---|---|---|---|---|
+| 2026-10-15T06:30:00Z | [38692857452](https://github.com/kruid1-2/memory-tide-data/actions/runs/38692857452) | 2026-10-15T14:31:02+08:00 | 53/50 | 62 |
+| 2026-10-15T06:45:00Z | [38694374639](https://github.com/kruid1-2/memory-tide-data/actions/runs/38694374639) | 2026-10-15T14:45:58+08:00 | 53/50 | 58 |
+| 2026-10-15T07:00:00Z | [38695947701](https://github.com/kruid1-2/memory-tide-data/actions/runs/38695947701) | 2026-10-15T15:01:05+08:00 | 53/50 | 65 |
+| 2026-10-15T07:15:00Z | [38697568582](https://github.com/kruid1-2/memory-tide-data/actions/runs/38697568582) | 2026-10-15T15:15:58+08:00 | 53/50 | 58 |
+
+最新额外核验：[38727867711](https://github.com/kruid1-2/memory-tide-data/actions/runs/38727867711)，2026-10-15T19:30:58+08:00，53话题/50排名，来源cloudflare-cron，原始SHA256 `fb5e715fd927094fc204d7e6b35f488e320c41c76132a942705fbb80910f7a1c`。最终检查时data分支有126个快照，首次手动和探针记录仍存在，未重置或删除历史。
+
+云端实际配置已读回：Cron `*/15 * * * *`，DISPATCH_ENABLED=true，已验收版本100%流量；Workers日志开启、调用日志开启、保留到仪表板开启、采样100%。临时本机日志监督进程已停止，Cloudflare采集继续运行；验收heartbeat在最终文件发布并读回之后暂停。
+
+### 原实验日志补证及故障保留
+
+2026-10-14原实验最初数据8/8但独立日志4/8，原因是本机tail连接中断。2026-10-15从Cloudflare Dashboard Observability按原UTC06:00–08:00检索，逐条展开实际console详情，提取14:15、15:15、15:30、15:45四条dispatch_accepted白名单字段。没有推断或生成替代事件，未导出请求头或账户元数据。补证后于2026-10-15T06:25:57Z独立重核8/8；原缺证报告和故障原始文件继续保留。此补证不替换新实验或切换后4窗口。
+
+### 证据与长期运行
+
+- [POST_SWITCH_REPORT.json](POST_SWITCH_REPORT.json)：后4窗逐次计划/分发、GH创建/启动/队列、采集、持久化及SHA256。
+- [POST_SWITCH_TRIGGER_LOGS.jsonl](POST_SWITCH_TRIGGER_LOGS.jsonl)：后4窗真实console白名单。
+- [ORIGINAL_LOG_RECOVERY_20261015.jsonl](ORIGINAL_LOG_RECOVERY_20261015.jsonl)、[ORIGINAL_RECOVERY_REPORT.json](ORIGINAL_RECOVERY_REPORT.json)：原实验后补证据与单独重核。
+- [FINAL_VERIFICATION.json](FINAL_VERIFICATION.json)：最终开关、最新采样、间隔及历史保留检查。
+
+系统采集可在本机关闭时继续运行，无需人工每15分钟操作；但GitHub Fine-grained Token将在2026-11-13到期，必须在到期前安全续期并用tools/setup_secrets.py更新Cloudflare Secret，禁止放入聊天、源码或日志。到期、GitHub/Cloudflare故障或微博接口变化仍可能中断，有限验收不保证永久可用。免费Workers日志保留3天，重要故障应在保留期内保存；当前未启用额外付费存储。
