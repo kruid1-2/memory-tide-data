@@ -1,0 +1,20 @@
+{
+  "schema_version": "1",
+  "run_id": "39708915557",
+  "attempt": 1,
+  "event": "workflow_dispatch",
+  "trigger_source": "cloudflare-cron",
+  "dispatch_id": "cf-1792634400",
+  "scheduled_at": "2026-10-22T02:00:00Z",
+  "dispatched_at": "2026-10-22T02:00:12.038Z",
+  "window_id": "1792634400",
+  "workflow_created_at": "2026-10-22T02:00:13Z",
+  "workflow_started_at": "2026-10-22T02:00:13Z",
+  "admitted_at": "2026-10-22T10:00:22+08:00",
+  "status": "success",
+  "canonical_run_id": "39708915557",
+  "snapshot_timestamp": "2026-10-22T10:00:23+08:00",
+  "raw_sha256": "00e574c35a58dd166bbf7ef77cafde51e510be741be95fbcd305906a4a22019f",
+  "quality": [],
+  "local_files_finished_at": "2026-10-22T10:00:23+08:00"
+}
