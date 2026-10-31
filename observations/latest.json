@@ -1,10 +1,10 @@
 {
-  "snapshot_id": "41233327427",
-  "timestamp": "2026-11-01T03:15:24+08:00",
-  "snapshot_path": "snapshots/2026-11-01/031524_41233327427.json",
-  "raw_path": "raw/2026-11-01/031524_41233327427.json",
-  "raw_sha256": "87477b4115f659580e2e027ddb926cdc66f91882938037756e6262c0d6e8d7f1",
-  "trend_path": "trends/2026-11-01/031524_41233327427.json",
+  "snapshot_id": "41234514556",
+  "timestamp": "2026-11-01T03:30:23+08:00",
+  "snapshot_path": "snapshots/2026-11-01/033023_41234514556.json",
+  "raw_path": "raw/2026-11-01/033023_41234514556.json",
+  "raw_sha256": "eadc3a99afef4781727d8e56d1eba9f226a8dd9fef50e5f90698ba10fb029334",
+  "trend_path": "trends/2026-11-01/033023_41234514556.json",
   "source": "weibo/official-desktop-hotsearch-v1",
-  "previous_snapshot_id": "41232093177"
+  "previous_snapshot_id": "41233327427"
 }
