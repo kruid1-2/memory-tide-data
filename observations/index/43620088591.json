@@ -1,0 +1,10 @@
+{
+  "snapshot_id": "43620088591",
+  "timestamp": "2026-11-15T01:15:31+08:00",
+  "snapshot_path": "snapshots/2026-11-15/011531_43620088591.json",
+  "raw_path": "raw/2026-11-15/011531_43620088591.json",
+  "raw_sha256": "500421082bea75588ff9cf5eba5d475dc02212c4ba8c50622153bbb9cbcd355c",
+  "trend_path": "trends/2026-11-15/011531_43620088591.json",
+  "source": "weibo/official-desktop-hotsearch-v1",
+  "previous_snapshot_id": "43618680548"
+}
