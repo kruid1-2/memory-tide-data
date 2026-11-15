@@ -1,14 +1,14 @@
 {
-  "last_success_at": "2026-11-15T10:00:31+08:00",
-  "last_snapshot_path": "snapshots/2026-11-15/100031_43665690183.json",
-  "last_success_run_id": "43665690183",
+  "last_success_at": "2026-11-15T10:15:32+08:00",
+  "last_snapshot_path": "snapshots/2026-11-15/101532_43666902902.json",
+  "last_success_run_id": "43666902902",
   "consecutive_failures": 0,
   "schema_version": "1.0",
   "source": "weibo/official-desktop-hotsearch-v1",
   "expected_interval_seconds": 900,
-  "last_attempt_at": "2026-11-15T10:00:31+08:00",
+  "last_attempt_at": "2026-11-15T10:15:32+08:00",
   "last_attempt_status": "success",
-  "last_attempt_run_id": "43665690183",
+  "last_attempt_run_id": "43666902902",
   "last_attempt_number": 1,
   "last_error": null
 }
