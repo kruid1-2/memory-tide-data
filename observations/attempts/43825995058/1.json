@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "source": "weibo/official-desktop-hotsearch-v1",
+  "run_id": "43825995058",
+  "attempt": 1,
+  "event": "workflow_dispatch",
+  "started_at": "2026-11-16T15:45:18+08:00",
+  "status": "success",
+  "snapshot_id": "43825995058",
+  "error": null,
+  "previous_attempt_key": "43824304706/1",
+  "snapshot_path": "snapshots/2026-11-16/154519_43825995058.json",
+  "raw_path": "raw/2026-11-16/154519_43825995058.json",
+  "raw_sha256": "c7b14fbfb3cb990f2714cda28d190a9700f22c8af002b83f969455f7331b2784",
+  "topic_count": 52,
+  "ranked_topic_count": 50,
+  "received_at": "2026-11-16T15:45:19+08:00",
+  "finished_at": "2026-11-16T15:45:19+08:00",
+  "attempt_at": "2026-11-16T15:45:19+08:00"
+}
